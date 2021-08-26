@@ -9,20 +9,32 @@
  */
 char *_strcat(char *dest, const char *src)
 {
-	char *destTemp;
-	const char *srcTemp;
+	int i;
+	int count;
+	int copy;
 
-	destTemp = dest;
-	srcTemp =  src;
+	for (i = 0; *(dest + i) != '\0';)
+	{
+		i++;
+	}
 
-	while (*destTemp != '\0')
-		destTemp++;
+	for (count = 0; *(src + count) != '\0';)
+	{
+		count++;
+	}
 
-	while (*srcTemp != '\0')
-		*destTemp++ = *srcTemp++;
-	*destTemp = '\0';
-	return (destTemp);
+	copy = 0;
+
+	while (copy < count)
+	{
+		dest[i] = src[copy];
+		copy++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
+
 
 /**
  * _strncat - Concantenates two strings where n number

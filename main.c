@@ -7,7 +7,11 @@
  */
 int main(void)
 {
-	prompt1();
-	locate();
+	while (1)
+	{
+		prompt1();
+		locate();
+		printf("\n");
+	}
 	return (0);
 }

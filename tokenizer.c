@@ -9,8 +9,7 @@
  */
 char **_tokenizer(char *str, char *delim)
 {
-	char **token_holder;
-	char *token;
+	char **token_holder, **holder, *token;
 	unsigned int length;
 	int i;
 
@@ -35,8 +34,11 @@ char **_tokenizer(char *str, char *delim)
 
 		_strcpy(token_holder[i], token);
 		token = strtok(NULL, delim);
-		++i;
+		i++;
 	}
+	
 	token_holder[i] = NULL;
-	return (token_holder);
+	holder = token_holder;
+	free_mem(token_holder);
+	return (holder);
 }
