@@ -84,15 +84,28 @@ int _strcmp(char *s1, char *s2)
 	return (s1[cnt] - s2[cnt]);
 }
 
+
+/**
+ * _strncmp - compaires n number of strings
+ * @s1: first string to perform comparison
+ * @s2: second string to perfomr compairson with
+ * @n: the count of strings to comapire
+ *
+ * Return: 0 if same, something else otherwise
+ */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t cnt;
+	size_t i;
 
-	for (cnt = 0; s1[cnt] == s2[cnt] && cnt < n; cnt++)
+	for (i = 0; s1[i] && s2[i] && i < n; i++)
 	{
-		if (s1[cnt] == '\0' && s2[cnt] == '\0')
-			return (0);
+		if (s1[i] > s2[i])
+			return (s1[i] - s2[i]);
+		else if (s1[i] < s2[i])
+			return (s1[i] - s2[i]);
 	}
-
-	return (s1[cnt] - s2[cnt]);
+	if (i == n)
+		return (0);
+	else
+		return (-15);
 }

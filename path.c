@@ -1,66 +1,69 @@
 #include "shell.h"
 
+
+
 /**
  * _getenv - gets $PATH
+ * @var: passed environ variable
  *
  * Return: Double pointer to variable path
  */
-char *_getenv(void)
+char *_getenv(const char *var)
 {
 	int index, len;
-	char *var = "PATH";
 
 	len = _strlen(var);
-	for (index = 0; environ[index]; index++)
+	for (index = 0; environ[index] != NULL; index++)
 	{
 		if (_strncmp(var, environ[index], len) == 0)
+		{
 			return (environ[index]);
+		}
 	}
 
 	return (NULL);
 }
 
 /**
- *
+ * locate - locates a command in PATH
  */
-void shell_exec(void)
+void locate(void)
 {
-	int status, cnt;
-	const char *pathname;
-	char *input = retrieve_input();
-	char *path = _getenv();
-	char **env_tokens = _tokenizer(path, ":");
-	char **input_tokens = _tokenizer(input, " \t\n\r");
+	int i;
+	char *token, *string, **input;
+	char *path[] = {
+		"/bin/",
+		"/usr/bin/",
+		"/usr/sbin/",
+		"/sbin/",
+		"/usr/local/bin/",
+		"/usr/local/sbin/",
+		NULL
+	};
 
-	pid_t child_pid = fork();
+	string = retrieve_input();
+	input = _tokenizer(string, " ");
 
-	cnt = 0;
-	while (env_tokens[cnt] != NULL)
+	for (i = 0; path[i]; i++)
 	{
-		_realloc(env_tokens[cnt], _strlen(env_tokens[cnt]), _strlen(env_tokens[cnt])\
-			       	+ _strlen(input_tokens[0]));
+		token = malloc(sizeof(_strlen(path[i])) + 1);
+		if (!token)
+			return;
 
-		pathname = _strcat(env_tokens[cnt], input_tokens[0]);
-		if ((status = stat(pathname, buf)) == 0)
+		_strcpy(token, path[i]);
+
+		token = _realloc(token, _strlen(token), _strlen(token) + _strlen(input[0]));
+		if (!token)
+			return;
+
+		_strcat(token, input[0]);
+		if (stat(token, &stats) == 0)
 		{
-			if (child_pid == 0)
-			{
-				execve(pathname, input_tokens, &path);
-				perror("shell");
-				exit (1);
-			}
-			else if(child_pid > 0)
-			{
-				int _status;
-				do {
-					waitpid(child_pid, &_status, WUNTRACED);
-				} while (!WIFEXITED(_status) && !WIFSIGNALED(_status));
-			}
-			else
-			{
-				perror("shell");
-			}
+			printf("%s\n", token);
+			executor(token);
+			exit(EXIT_SUCCESS);
 		}
-		cnt++;
 	}
+	perror("stat");
+	exit(EXIT_FAILURE);
 }

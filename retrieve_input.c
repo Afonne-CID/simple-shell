@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * retrieve_input - gets line(s) of input 
+ * retrieve_input - gets line(s) of input
  *
  * Return: the retrieved string
  */
@@ -11,7 +11,7 @@ char *retrieve_input(void)
 	ssize_t get_cnt;
 	size_t cnt;
 	char *buffer = NULL;
-	
+
 	get_cnt = getline(&buffer, &cnt, stdin);
 	if (get_cnt != -1)
 	{

@@ -21,7 +21,7 @@ char *_strcat(char *dest, const char *src)
 	while (*srcTemp != '\0')
 		*destTemp++ = *srcTemp++;
 	*destTemp = '\0';
-	return (dest);
+	return (destTemp);
 }
 
 /**

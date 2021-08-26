@@ -3,6 +3,7 @@
 /**
  * _tokenizer - tokenizes a string into chunks
  * @str: the string to tokenize
+ * @delim: delimeter
  *
  * Return: Double pointer to string (array of arrays)
  */

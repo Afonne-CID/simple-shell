@@ -13,11 +13,11 @@
 #include <stdio.h>
 #include <string.h>
 
-/* buf - a struct of stat type as defined in the <sys/stat.h>*/
-struct stat *buf;
-
 /* Global environemnt */
 extern char **environ;
+
+/* inbuilt structure data type */
+struct stat stats;
 
 /**
  * struct list_s - A new struct type defining a linked list.
@@ -41,14 +41,23 @@ typedef struct builtin_s
 	int (*f)(char **argv, char **front);
 } builtin_t;
 
-char *_getenv(void);
+char *strip(char *path);
+int token_len(char *str, char *delim);
+int count_tokens(char *str, char *delim);
+char **_strtok(char *line, char *delim);
+char **_copyenv(void);
+void free_env(void);
+char *_getenv(const char *var);
 char *fill_path_dir(char *path);
 list_t *get_path_dir(char *path);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void shell_exec(void);
+
+void locate(void);
+void executor(char *token);
 char *_strncpy(char *dest, char *src, int n);
 void free_mem(char **str);
+char **_tokenizer2(char *str);
 char **_tokenizer(char *str, char *delim);
 void prompt1(void);
 char *retrieve_input(void);
