@@ -36,7 +36,7 @@ char **_tokenizer(char *str, char *delim)
 		token = strtok(NULL, delim);
 		i++;
 	}
-	
+
 	token_holder[i] = NULL;
 	holder = token_holder;
 	free_mem(token_holder);
