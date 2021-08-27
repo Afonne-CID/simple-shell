@@ -16,9 +16,23 @@
 /* Global environemnt */
 extern char **environ;
 
+/**
+ * struct builtin - structure with two members
+ * @name: first member
+ * @func: function pointer
+ */
+typedef struct builtin
+{
+	char *name;
+	void (*func)(char **args);
+} builtin_t;
+
+void (*func)(char **args);
+
 char **_getenv(const char *var);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
+int hsh_exec(char *token, char **args);
 int locate(void);
 void executor(char *token);
 char *_strncpy(char *dest, char *src, int n);
