@@ -8,13 +8,16 @@
 int main(void)
 {
 	counter *ptr;
+	ptr = malloc(sizeof(char *));
+	ptr->cnt = 0;
 
 	while (1)
 	{
-		ptr = malloc(sizeof(ptr));
-		ptr->cnt++;
 		prompt1();
 		locate();
+		ptr->cnt++;
 	}
+
+	free(ptr);
 	return (0);
 }

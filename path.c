@@ -49,7 +49,7 @@ int locate(void)
 		hsh_help();
 	if (_strcmp(inputs[0], "exit") == 0)
 		hsh_exit();
-	if (inputs[0][0] == EOF)
+	if (inputs[0][0] == EOF || inputs[0][0] == -1)
 		hsh_exit();
 
 	for (i = 0; path[i]; i++)

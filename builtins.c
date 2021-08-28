@@ -23,8 +23,7 @@ void hsh_cd(char **args)
 
 	if (i > 2)
 	{
-		perror("cd");
-		return;
+		err_msg(args);
 	}
 	if (i == 1)
 	{
@@ -33,11 +32,13 @@ void hsh_cd(char **args)
 		free(current);
 		return;
 	}
-
-	status = chdir(args[1]);
-	if (status == -1)
+	else if(i == 2)
 	{
-		perror("hsh: cd");
+		status = chdir(args[1]);
+		if (status == -1)
+		{
+			err_msg(args);
+		}
 	}
 }
 

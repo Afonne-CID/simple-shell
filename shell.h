@@ -17,7 +17,7 @@
 extern char **environ;
 
 /**
- * count - struct to keep the number of execution of "hsh".
+ * struct count - struct to keep the number of execution of "hsh".
  * @cnt: member
  */
 typedef struct count
@@ -25,7 +25,8 @@ typedef struct count
 	ssize_t cnt;
 } counter;
 
-void err(char **args);
+char *_tostring(int num);
+void err_msg(char **args);
 void hsh_exit(void);
 void hsh_cd(char **args);
 void hsh_help(void);
