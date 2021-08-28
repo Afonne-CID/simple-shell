@@ -17,21 +17,24 @@
 extern char **environ;
 
 /**
- * struct builtin - structure with two members
- * @name: first member
- * @func: function pointer
+ * count - struct to keep the number of execution of "hsh".
+ * @cnt: member
  */
-typedef struct builtin
+typedef struct count
 {
-	char *name;
-	void (*func)(char **args);
-} builtin_t;
+	ssize_t cnt;
+} counter;
 
-void (*func)(char **args);
+void err(char **args);
+void hsh_exit(void);
+void hsh_cd(char **args);
+void hsh_help(void);
 
+int _putchar(char c);
 char **_getenv(const char *var);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
+int _strcmp(char *s1, char *s2);
 int hsh_exec(char *token, char **args);
 int locate(void);
 void executor(char *token);

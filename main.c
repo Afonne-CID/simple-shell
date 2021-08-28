@@ -7,11 +7,14 @@
  */
 int main(void)
 {
+	counter *ptr;
+
 	while (1)
 	{
+		ptr = malloc(sizeof(ptr));
+		ptr->cnt++;
 		prompt1();
 		locate();
-		printf("\n");
 	}
 	return (0);
 }

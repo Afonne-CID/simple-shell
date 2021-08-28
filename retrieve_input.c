@@ -13,16 +13,13 @@ char *retrieve_input(void)
 	char *buffer = NULL;
 
 	get_cnt = getline(&buffer, &cnt, stdin);
-	if (get_cnt != -1)
-	{
-		buffer[cnt - 1] = '\0';
-	}
-	else
+	if (get_cnt == -1)
 	{
 		free(buffer);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
-
+	
+	buffer[cnt - 1] = '\0';
 	string = malloc(sizeof(char *) * _strlen(buffer + 1));
 	if (!string)
 		return (NULL);
