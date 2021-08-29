@@ -23,6 +23,7 @@ void hsh_cd(char **args)
 
 	if (i > 2)
 	{
+		printf("1 I am the culpri\n");
 		err_msg(args);
 	}
 	if (i == 1)
@@ -32,7 +33,7 @@ void hsh_cd(char **args)
 		free(current);
 		return;
 	}
-	else if(i == 2)
+	else
 	{
 		status = chdir(args[1]);
 		if (status == -1)
@@ -53,4 +54,27 @@ void hsh_help(void)
 		"      exit        Exit the shell.\n"
 		"      help        Print this help text.\n";
 	printf("%s", helptext);
+}
+
+/**
+ * fetch_builtin - function pointer
+ * @args: parameter to function "fetch_builtin"
+ *
+ * Return: Calls a function
+ */
+void (*fetch_builtin(char *args))(void)
+{
+	int i;
+
+	builtin_t builds[] = {
+		{"help", hsh_help},
+		{"exit", hsh_exit},
+		{NULL, NULL}
+	};
+
+	i = 0;
+	while (builds[i].member != NULL && builds[i].member != args)
+		i++;
+
+	return (builds[i].f);
 }

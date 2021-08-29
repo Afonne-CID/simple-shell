@@ -17,8 +17,7 @@ int hsh_exec(char *token, char **args)
 		{
 			execve(token, args, environ);
 			err_msg(args);
-/*			perror("hsh");
-			exit(-1);*/
+			exit(-1);
 		}
 		else if (child_pid > 0)
 		{
@@ -31,14 +30,13 @@ int hsh_exec(char *token, char **args)
 		else
 		{
 			err_msg(args);
-			/*return (-1);*/
+			return (-1);
 		}
 	}
 	else
 	{
 		err_msg(args);
-/*		perror("hsh");
-		return (-1);*/
+		return (-1);
 	}
 	return (0);
 }

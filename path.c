@@ -35,7 +35,8 @@ int locate(void)
 	char *path[] = {"/usr/bin/", "/usr/sbin/", "/usr/local/bin/",
 		"/usr/local/sbin/", NULL};
 	string = retrieve_input();
-	if (!string || (_strcmp(string, "\n") == 0) || *string == 9 || (_strcmp(string, "\r") == 0) || *string == ' ')
+	if (!string || (_strcmp(string, "\n") == 0) || *string == 9
+			|| (_strcmp(string, "\r") == 0) || *string == ' ')
 	{
 		free(string);
 		return (0);
@@ -44,13 +45,12 @@ int locate(void)
 	input = strtok(string, " ");
 
 	if (_strcmp(inputs[0], "cd") == 0)
+	{
 		hsh_cd(inputs);
-	if (_strcmp(inputs[0], "help") == 0)
-		hsh_help();
-	if (_strcmp(inputs[0], "exit") == 0)
-		hsh_exit();
-	if (inputs[0][0] == EOF || inputs[0][0] == -1)
-		hsh_exit();
+		return (0);
+	}
+	if (_strcmp(inputs[0], "help") == 0 || _strcmp(inputs[0], "exit") == 0)
+		fetch_builtin(inputs[0])();
 
 	for (i = 0; path[i]; i++)
 	{

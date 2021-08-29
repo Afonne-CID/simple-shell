@@ -2,6 +2,7 @@
 
 /**
  * err_msg - prints error msg
+ * @args: double pointer to input command and args
  */
 void err_msg(char **args)
 {
@@ -9,6 +10,7 @@ void err_msg(char **args)
 	char *space = ": ";
 	char *msg, *string = "hsh: ";
 	char *cnt;
+
 	ptr = malloc(sizeof(ptr));
 	ptr->cnt++;
 
@@ -33,12 +35,13 @@ void err_msg(char **args)
 	_strcat(msg, args[0]);
 
 	perror(msg);
-	return;
 }
 
 /**
  * _tostring - converts int to char || integers to strings
  * @num: number to convert
+ *
+ * Return: Returns converted string
  */
 char *_tostring(int num)
 {
@@ -47,7 +50,7 @@ char *_tostring(int num)
 
 	len = 0;
 	n = num;
-	
+
 	while (n != 0)
 	{
 		len++;

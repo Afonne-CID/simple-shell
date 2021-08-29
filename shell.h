@@ -25,6 +25,13 @@ typedef struct count
 	ssize_t cnt;
 } counter;
 
+typedef struct builtin
+{
+	char *member;
+	void (*f)(void);
+} builtin_t;
+
+void (*fetch_builtin(char *args))(void);
 char *_tostring(int num);
 void err_msg(char **args);
 void hsh_exit(void);

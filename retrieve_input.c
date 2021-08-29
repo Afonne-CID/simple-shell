@@ -18,7 +18,7 @@ char *retrieve_input(void)
 		free(buffer);
 		return (NULL);
 	}
-	
+
 	buffer[cnt - 1] = '\0';
 	string = malloc(sizeof(char *) * _strlen(buffer + 1));
 	if (!string)
