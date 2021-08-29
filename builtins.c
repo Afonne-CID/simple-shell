@@ -2,10 +2,13 @@
 
 /**
  * hsh_exit - built in exit command
+ *
+ * Return: status
  */
-void hsh_exit(void)
+int hsh_exit(void)
 {
 	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 /**
@@ -45,8 +48,10 @@ void hsh_cd(char **args)
 
 /**
  * hsh_help - help command
+ *
+ * Return: Retuns status code
  */
-void hsh_help(void)
+int hsh_help(void)
 {
 	char *helptext =
 		"hsh - The following commands are availabe:\n"
@@ -54,27 +59,19 @@ void hsh_help(void)
 		"      exit        Exit the shell.\n"
 		"      help        Print this help text.\n";
 	printf("%s", helptext);
+	return (0);
 }
 
 /**
- * fetch_builtin - function pointer
- * @args: parameter to function "fetch_builtin"
- *
- * Return: Calls a function
+ * fetch_builtin - gets the right function to run
+ * @args: argument content command
  */
-void (*fetch_builtin(char *args))(void)
+void fetch_builtin(char *args)
 {
-	int i;
-
-	builtin_t builds[] = {
-		{"help", hsh_help},
-		{"exit", hsh_exit},
-		{NULL, NULL}
-	};
-
-	i = 0;
-	while (builds[i].member != NULL && builds[i].member != args)
-		i++;
-
-	return (builds[i].f);
+	if (_strcmp(args, "exit") == 0)
+		hsh_exit();
+	if (_strcmp(args, "help") == 0)
+		hsh_help();
+	if (args[0] == EOF || args[0] == -1)
+		hsh_exit();
 }

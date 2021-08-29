@@ -13,30 +13,30 @@
 #include <stdio.h>
 #include <string.h>
 
+#define KEEP_CNT 0
+
+
 /* Global environemnt */
 extern char **environ;
+
+/* keeps count */
 
 /**
  * struct count - struct to keep the number of execution of "hsh".
  * @cnt: member
  */
-typedef struct count
+typedef struct list
 {
-	ssize_t cnt;
-} counter;
+	int cnt;
+	struct list *next;
+} list_t;
 
-typedef struct builtin
-{
-	char *member;
-	void (*f)(void);
-} builtin_t;
-
-void (*fetch_builtin(char *args))(void);
+void fetch_builtin(char *args);
 char *_tostring(int num);
 void err_msg(char **args);
-void hsh_exit(void);
+int hsh_exit(void);
 void hsh_cd(char **args);
-void hsh_help(void);
+int hsh_help(void);
 
 int _putchar(char c);
 char **_getenv(const char *var);

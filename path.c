@@ -36,7 +36,7 @@ int locate(void)
 		"/usr/local/sbin/", NULL};
 	string = retrieve_input();
 	if (!string || (_strcmp(string, "\n") == 0) || *string == 9
-			|| (_strcmp(string, "\r") == 0) || *string == ' ')
+			|| (_strcmp(string, "\r") == 0) || *string == ' ' || *string == 4)
 	{
 		free(string);
 		return (0);
@@ -50,8 +50,10 @@ int locate(void)
 		return (0);
 	}
 	if (_strcmp(inputs[0], "help") == 0 || _strcmp(inputs[0], "exit") == 0)
-		fetch_builtin(inputs[0])();
-
+	{
+		fetch_builtin(inputs[0]);
+		return (0);
+	}
 	for (i = 0; path[i]; i++)
 	{
 		token = malloc(sizeof(_strlen(path[i])) + 1);
@@ -64,8 +66,7 @@ int locate(void)
 			free(token);
 			return (-1);
 		}
-		_strcat(token, input);
-		hsh_exec(token, inputs);
+		hsh_exec((_strcat(token, input)), inputs);
 		return (0);
 	}
 	return (0);

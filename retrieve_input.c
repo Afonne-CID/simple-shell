@@ -15,8 +15,9 @@ char *retrieve_input(void)
 	get_cnt = getline(&buffer, &cnt, stdin);
 	if (get_cnt == -1)
 	{
+		_putchar(10);
 		free(buffer);
-		return (NULL);
+		exit(EXIT_FAILURE);
 	}
 
 	buffer[cnt - 1] = '\0';

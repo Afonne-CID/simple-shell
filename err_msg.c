@@ -6,20 +6,17 @@
  */
 void err_msg(char **args)
 {
-	counter *ptr;
+	static ssize_t keeps_cnt = 1;
 	char *space = ": ";
 	char *msg, *string = "hsh: ";
 	char *cnt;
-
-	ptr = malloc(sizeof(ptr));
-	ptr->cnt++;
 
 	msg = malloc(sizeof(char) * _strlen(string));
 	if (!msg)
 		return;
 
 	_strcpy(msg, string);
-	cnt = _tostring(ptr->cnt);
+	cnt = _tostring((int)keeps_cnt);
 
 	msg = _realloc(msg, _strlen(msg), _strlen(msg) + _strlen(cnt) + 3);
 	if (!msg)
@@ -32,6 +29,7 @@ void err_msg(char **args)
 	if (!msg)
 		return;
 
+	keeps_cnt++;
 	_strcat(msg, args[0]);
 
 	perror(msg);
