@@ -7,9 +7,9 @@
  */
 char *retrieve_input(void)
 {
-	char *string = '\0';
 	ssize_t get_cnt;
 	size_t cnt;
+	char *next = NULL;
 	char *buffer = NULL;
 
 	get_cnt = getline(&buffer, &cnt, stdin);
@@ -19,14 +19,23 @@ char *retrieve_input(void)
 		free(buffer);
 		exit(EXIT_FAILURE);
 	}
-
 	buffer[cnt - 1] = '\0';
-	string = malloc(sizeof(char *) * _strlen(buffer + 1));
-	if (!string)
-		return (NULL);
-
-	_strcpy(string, buffer);
-	free(buffer);
-
-	return (string);
+	while (buffer[_strlen(buffer) - 2] == '\\')
+	{
+		buffer[_strlen(buffer) - 2] = '\0';
+		next = buf_size(next, buffer);
+		_strcat(next, buffer);
+		prompt2();
+		get_cnt = getline(&buffer, &cnt, stdin);
+		if (get_cnt == -1)
+		{
+			_putchar(10);
+			free(buffer);
+			free(next);
+			exit(EXIT_FAILURE);
+		}
+	}
+	next = buf_size(next, buffer);
+	_strcat(next, buffer);
+	return (next);
 }

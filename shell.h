@@ -19,8 +19,6 @@
 /* Global environemnt */
 extern char **environ;
 
-/* keeps count */
-
 /**
  * struct count - struct to keep the number of execution of "hsh".
  * @cnt: member
@@ -31,6 +29,7 @@ typedef struct list
 	struct list *next;
 } list_t;
 
+char *buf_size(char *next, char *buffer);
 void fetch_builtin(char *args);
 char *_tostring(int num);
 void err_msg(char **args);

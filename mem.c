@@ -68,3 +68,34 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	free(ptr);
 	return (mem);
 }
+
+/**
+ * buf_size - resizes pointer to array of chars
+ * @next: parameter to resize
+ * @buffer: parameter to realloc with
+ *
+ * Return: pointer to new malloc'd or realloc'd size
+ */
+char *buf_size(char *next, char *buffer)
+{
+	if (!next)
+	{
+		next = malloc(sizeof(char *) * _strlen(buffer) + 1);
+		if (!next)
+		{
+			free(buffer);
+			return (NULL);
+		}
+	}
+	else
+	{
+		next = _realloc(next, _strlen(next), _strlen(next) + _strlen(buffer) + 1);
+		if (!next)
+		{
+			free(buffer);
+			free(next);
+			return (NULL);
+		}
+	}
+	return (next);
+}
