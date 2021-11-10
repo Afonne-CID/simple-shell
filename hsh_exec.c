@@ -9,19 +9,23 @@
  */
 int hsh_exec(char *token, char **args)
 {
-	if (access(token, F_OK) == 0)
+	pid_t child_pid;
+	int status;
+
+	if (access(token, X_OK) == 0)
 	{
-		pid_t child_pid = fork();
+		child_pid = fork();
 
 		if (child_pid == 0)
 		{
-			execve(token, args, environ);
-			err_msg(args);
-			exit(-1);
+			if ((execve(token, args, environ) == -1))
+			{
+				err_msg(args);
+				exit(-1);
+			}
 		}
 		else if (child_pid > 0)
 		{
-			int status;
 
 			do {
 				waitpid(child_pid, &status, WUNTRACED);
