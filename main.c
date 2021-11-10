@@ -7,10 +7,10 @@
  */
 int main(void)
 {
-	while (1)
-	{
+	do {
 		prompt1();
 		locate();
-	}
+	} while (1);
+
 	return (0);
 }

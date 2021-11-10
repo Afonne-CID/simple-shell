@@ -9,21 +9,14 @@
  */
 char *_strcat(char *dest, const char *src)
 {
-	int i;
-	int count;
-	int copy;
-
-	for (i = 0; *(dest + i) != '\0';)
-	{
-		i++;
-	}
-
-	for (count = 0; *(src + count) != '\0';)
-	{
-		count++;
-	}
-
-	copy = 0;
+	int i = _strlen(dest);
+	int count = _strlen(src);
+	int copy = 0;
+	
+	if (!dest)
+		dest = " ";
+	if (!src)
+		return (dest);
 
 	while (copy < count)
 	{

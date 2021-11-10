@@ -37,5 +37,6 @@ char *retrieve_input(void)
 	}
 	next = buf_size(next, buffer);
 	_strcat(next, buffer);
+	free(buffer);
 	return (next);
 }
